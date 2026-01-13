@@ -11,7 +11,7 @@ export const getUserDetails = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       });
-      return res.data;
+      return {token: token, data: res.data};
     } catch (error) {
       if (axios.isAxiosError(error)) {
         return thunkApi.rejectWithValue("Unauthorized");
@@ -114,7 +114,7 @@ const userSlice = createSlice({
         state.error = action.payload;
       });
     builder.addCase(getUserDetails.fulfilled, (state, action) => {
-      state.token = action.payload;
+      state.token = action.payload.token;
     }),
       builder.addCase(getUserDetails.rejected, (state, action) => {
         state.token = null;

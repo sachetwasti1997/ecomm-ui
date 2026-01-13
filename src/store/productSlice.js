@@ -6,7 +6,7 @@ export const getProduct = createAsyncThunk(
     async(page, thunkApi) => {
         try{
             const res = await axios.get(`http://localhost:32500/product/get-products?page=${page}&size=8`)
-            return {data: res.data.content, page: page};
+            return {data: res.data, page: page};
         }catch(error) {
             if(axios.isAxiosError(error)) {
                 return thunkApi.rejectWithValue(error.response.data.message);
@@ -35,7 +35,7 @@ const productSlice = createSlice({
         builder.addCase(getProduct.fulfilled, (state, action) => {
             const products = [...action.payload.data]
             const tmpProducts = {...state.products}
-            console.log(tmpProducts);
+            // console.log(tmpProducts);
             
             products.forEach(ele => tmpProducts[ele.id] = ele)
             state.products = tmpProducts;

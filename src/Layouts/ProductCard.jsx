@@ -10,7 +10,7 @@ const ProductCard = ({value}) => {
       {/* <!-- Product Image --> */}
       <img
         className="w-full h-48 object-cover"
-        src={images ? images[images.length - 1].url: "default"}
+        src={images !== undefined && images !== null && images.length > 0 ? images[images.length - 1].url: "default"}
         alt="Product Image"
       />
 

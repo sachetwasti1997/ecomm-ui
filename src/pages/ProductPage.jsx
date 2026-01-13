@@ -23,8 +23,9 @@ const ProductPage = ({ productId }) => {
   //     rating: 4.5,
   //   };
 
-  console.log(window.location.pathname.split("/"), productId);
   const [product, setProduct] = useState({});
+  const [image, setImage] = useState(0);
+  const [imageArr, setImageArr] = useState(undefined);
 
   const fetchProduct = async () => {
     const id = window.location.pathname.split("/")[2];
@@ -33,13 +34,21 @@ const ProductPage = ({ productId }) => {
       [id]
     );
     setProduct(res.data[0]);
+    setImageArr(res.data[0]['imagesDto'])
   };
 
   useEffect(() => {
     fetchProduct();
   }, []);
 
-  const images = product.imagesDto;
+  const swapImages = (indx) => {
+    const img = [...imageArr];
+    const ele = img[0];
+    img[0] = img[indx];
+    img[indx] = ele;
+    setImageArr(img);
+  }
+  
 
   return (
     <div className="container mx-auto p-4 md:p-8">
@@ -48,18 +57,24 @@ const ProductPage = ({ productId }) => {
         <div className="md:w-1/2">
           {/* Main Image */}
           <img
-            src={images ? images[images.length - 1].url : "default"}
+            src={imageArr ? imageArr[image].url : "default"}
             alt={product.title}
             className="w-full h-auto object-cover rounded-lg shadow-lg"
           />
           {/* Thumbnail Images */}
-          <div className="flex gap-4 mt-4">
-            <ul>
-              {product.imagesDto &&
-                product.imagesDto.forEach((element) => {
-                  <li>This is </li>;
-                })}
-            </ul>
+          <div className="flex gap-4 mt-2">
+            {imageArr &&
+              imageArr.map((element, index) => (
+                <img
+                  key={element.id}
+                  src={element.url}
+                  alt={product.title}
+                  className="rounded-lg shadow-lg w-20 h-20"
+                  onClick={() => {
+                    swapImages(index);
+                  }}
+                />
+              ))}
           </div>
         </div>
 

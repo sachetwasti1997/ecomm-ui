@@ -19,7 +19,7 @@ function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  console.log(userState);
+  // console.log(userState);
   
 
   const loggedInRoutes = () => {
@@ -42,7 +42,7 @@ function App() {
 
   useEffect(() => {
       if (userState.token != null && userState.token.length > 0) {
-        console.log("Got the token");
+        // console.log("Got the token");
         localStorage.setItem('token', userState.token)
         navigate("/", {replace: true});
       }
