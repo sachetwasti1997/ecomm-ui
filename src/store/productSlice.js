@@ -5,7 +5,7 @@ export const getProduct = createAsyncThunk(
     "product-paginated",
     async(page, thunkApi) => {
         try{
-            const res = await axios.get(`http://localhost:32500/product/get-products?page=${page}&size=8`)
+            const res = await axios.get(`http://localhost:80/product/get-products?page=${page}&size=8`)
             return {data: res.data, page: page};
         }catch(error) {
             if(axios.isAxiosError(error)) {

@@ -30,7 +30,7 @@ const ProductPage = ({ productId }) => {
   const fetchProduct = async () => {
     const id = window.location.pathname.split("/")[2];
     const res = await axios.post(
-      `http://localhost:32500/product/get-products-async`,
+      `http://localhost:80/product/get-products-async`,
       [id]
     );
     setProduct(res.data[0]);

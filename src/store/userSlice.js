@@ -6,7 +6,7 @@ export const getUserDetails = createAsyncThunk(
   async (token, thunkApi) => {
 
     try {
-      const res = await axios.get("http://localhost:32000/user/fetch", {
+      const res = await axios.get("http://localhost:80/user/fetch", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -24,7 +24,7 @@ export const userSignUp = createAsyncThunk(
   "user-sign-up",
   async (user, thunkApi) => {
     try {
-      const res = await axios.post("http://localhost:32000/user/signup", user);
+      const res = await axios.post("http://localhost:80/user/signup", user);
 
       return res.data;
     } catch (error) {
@@ -48,7 +48,7 @@ export const userLogIn = createAsyncThunk(
   async (loginRequest, thunkApi) => {
     try {
       const res = await axios.post(
-        "http://localhost:32000/user/login",
+        "http://localhost:80/user/login",
         loginRequest
       );
 
