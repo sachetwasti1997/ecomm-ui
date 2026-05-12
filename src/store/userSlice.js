@@ -24,7 +24,11 @@ export const userSignUp = createAsyncThunk(
   "user-sign-up",
   async (user, thunkApi) => {
     try {
-      const res = await axios.post("http://localhost:80/user/signup", user);
+      const res = await axios.post("http://localhost:80/user/signup", user, {
+          headers: {
+              'Host': "www.product.com"
+          }
+      });
 
       return res.data;
     } catch (error) {
